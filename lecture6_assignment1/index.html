@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            height: 90vh;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .one{
+            height: 250px;
+            width: 250px;
+            border: solid 5px brown;
+        }
+        .two{
+               height: 250px;
+            width: 250px;
+            border: solid 5px brown;
+        }
+        .three{
+            height: 250px;
+            width: 250px;
+            border: solid 5px brown;
+        }
+        .four{
+               height: 250px;
+            width: 250px;
+            border: solid 5px brown;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="one box"></div>
+        <div class="two box"></div>
+        <div class="three box"></div>
+        <div class="four box"></div>
+    </div>
+    <script>
+    const boxes = document.querySelectorAll('.box');
+
+    async function fetchData() {
+      try {
+        const response = await fetch('https://dummyjson.com/products/search?q=phone');
+        const data = await response.json();
+        const products = data.products;
+
+        
+        boxes.forEach((box, index) => {
+          const product = products[index];
+          box.innerHTML = `
+            <h3>${product.title}</h3>
+            <p>Price: $${product.price}</p>
+            <p>${product.description}</p>
+          `;
+        });
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>
